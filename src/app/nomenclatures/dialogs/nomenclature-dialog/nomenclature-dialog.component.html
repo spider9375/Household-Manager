@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Nomenclature</h2>
+<mat-dialog-content>
+  @if (!!formGroup) {
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </form>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="submit()">Done</button>
+  <button mat-button color="warn" [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>
