@@ -7,11 +7,15 @@ html, body {
   height: 100%;
 }
 
+mat-icon {
+  font-family: 'Material Symbols Outlined', serif !important;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mat-success {
-  color: green !important;
+  color: rgb(16 185 129) !important;
 }

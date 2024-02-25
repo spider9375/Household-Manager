@@ -20,7 +20,8 @@ a {
   flex-direction: row;
   gap: 0.5rem;
 
-  .nav-item {}
+  .nav-item {
+  }
 
 
 }
@@ -28,4 +29,5 @@ a {
 main {
   box-sizing: border-box;
   height: calc(100vh - 64px);
+  width: 100vw;
 }

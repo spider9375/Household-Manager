@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
+import {NomenclaturesComponent} from "./nomenclatures/nomenclatures.component";
 
 export const routes: Routes = [
-    {path: "", pathMatch: "full", redirectTo: "dashboard"},
     {
         path: "dashboard",
         loadChildren: () => import("./dashboard/dashboard.routes").then(x => x.routes)
@@ -16,6 +16,9 @@ export const routes: Routes = [
     },
     {
         path: "nomenclatures",
-        loadChildren: () => import("./nomenclatures/nomenclatures.routes").then(x => x.routes)
-    }
+        component: NomenclaturesComponent,
+        loadChildren: () => import("./nomenclatures/nomenclatures.routes").then(x => x.routes),
+    },
+    {path: "", pathMatch: "full", redirectTo: "dashboard"},
+
 ];

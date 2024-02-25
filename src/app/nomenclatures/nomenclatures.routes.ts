@@ -1,6 +1,8 @@
 import {Routes} from "@angular/router";
-import {NomenclaturesComponent} from "./nomenclatures.component";
 
 export const routes: Routes = [
-  {path: "", pathMatch: "full", component: NomenclaturesComponent}
+    {
+        path: ":nomenclature",
+        loadChildren: () => import("./categories/categories.routes").then(x => x.routes)
+    },
 ]
