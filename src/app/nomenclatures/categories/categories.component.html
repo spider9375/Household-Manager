@@ -1,0 +1,18 @@
+<div class="h-full flex flex-col">
+  <mat-toolbar>
+    <button mat-button color="success" (click)="openDialog()">Add Category</button>
+  </mat-toolbar>
+  @if (!loading) {
+    <app-category-table [categories]="categories"
+                        (delete)="delete($event)"
+                        (edit)="edit($event)"
+    >
+
+    </app-category-table>
+  } @else {
+    <div class="flex items-center justify-center h-full">
+      <mat-spinner/>
+    </div>
+  }
+</div>
+
