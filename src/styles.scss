@@ -1,7 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "styles/theme";
+
 
 html, body {
   height: 100%;
@@ -18,4 +22,16 @@ body {
 
 .mat-success {
   color: rgb(16 185 129) !important;
+}
+
+a {
+  text-decoration: none;
+
+  &.active {
+    background: #0003 !important;
+  }
+
+  &:hover {
+    background: #0006;
+  }
 }

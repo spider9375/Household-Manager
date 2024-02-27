@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="overflow-auto">
+  <nav class="flex flex-row gap-3 items-center justify-between w-full">
+    <div class="flex flex-row gap-3">
+      <a mat-flat-button
+         color="primary"
+         class="nav-item"
+         [routerLinkActive]="'active'"
+         routerLink="/dashboard">Dashboard</a>
+      <a mat-flat-button
+         color="primary"
+         class="nav-item"
+         [routerLinkActive]="'active'"
+         routerLink="/expenses">Expenses</a>
+      <a mat-flat-button
+         color="primary"
+         class="nav-item"
+         [routerLinkActive]="'active'"
+         routerLink="/inventory">Inventory</a>
+      <a mat-flat-button
+         color="primary"
+         class="nav-item"
+         [routerLinkActive]="'active'"
+         routerLink="/nomenclatures">Nomenclatures</a>
+    </div>
+
+    <div>
+      <app-theme-picker></app-theme-picker>
+    </div>
+  </nav>
+</mat-toolbar>

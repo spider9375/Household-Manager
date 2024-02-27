@@ -1,30 +1,9 @@
-<mat-toolbar color="primary" class="overflow-auto">
-  <nav class="navigation">
-    <a mat-flat-button
-       color="primary"
-       class="nav-item"
-       [routerLinkActive]="'active'"
-       routerLink="/dashboard">Dashboard</a>
-    <a mat-flat-button
-       color="primary"
-       class="nav-item"
-       [routerLinkActive]="'active'"
-       routerLink="/expenses">Expenses</a>
-    <a mat-flat-button
-       color="primary"
-       class="nav-item"
-       [routerLinkActive]="'active'"
-       routerLink="/inventory">Inventory</a>
-    <a mat-flat-button
-       color="primary"
-       class="nav-item"
-       [routerLinkActive]="'active'"
-       routerLink="/nomenclatures">Nomenclatures</a>
-  </nav>
-</mat-toolbar>
+<div class="mat-app-background" [ngClass]="themeService.theme() + '-theme'">
+  <app-navbar></app-navbar>
+  <main class="overflow-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>
 
-<main class="overflow-auto">
-  <router-outlet></router-outlet>
-</main>
 
 

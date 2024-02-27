@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {
     MatDrawer,
     MatDrawerContainer,
@@ -8,14 +8,8 @@ import {
     MatSidenavContent
 } from "@angular/material/sidenav";
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatButton, MatFabButton, MatMiniFabButton} from "@angular/material/button";
-import {MatDialog} from "@angular/material/dialog";
-import {
-    NomenclatureDialogComponent
-} from "./dialogs/nomenclature-dialog/nomenclature-dialog.component";
+import {MatAnchor, MatButton, MatFabButton, MatMiniFabButton} from "@angular/material/button";
 import {RouterLink, RouterModule, RouterOutlet} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
 import {NgClass} from "@angular/common";
 
 @Component({
@@ -36,20 +30,10 @@ import {NgClass} from "@angular/common";
         RouterModule,
         RouterLink,
         NgClass,
+        MatAnchor,
     ],
     templateUrl: './nomenclatures.component.html',
     styleUrl: './nomenclatures.component.scss'
 })
-export class NomenclaturesComponent implements OnInit {
-    dialog = inject(MatDialog);
-
-    http = inject(HttpClient);
-
-    ngOnInit() {
-        this.http.get(`${environment.serverUrl}/category`).subscribe(res => console.log(res))
-    }
-
-    openDialog() {
-        const ref = this.dialog.open(NomenclatureDialogComponent, {data: {foo: "foo"}})
-    }
+export class NomenclaturesComponent {
 }
