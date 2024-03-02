@@ -1,14 +1,14 @@
 require('dotenv').config()
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const categories = require('./routes/categories');
-const items = require('./routes/items');
+import express from 'express';
+import { serve, setup } from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import cors from 'cors';
+import { json } from 'body-parser';
+import {Connection, createConnection } from 'mysql';
+import {categories} from './routes/categories';
+import {items} from './routes/items';
 
-const connection = mysql.createConnection({
+const connection = createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -35,11 +35,11 @@ const swaggerSpec = swaggerJsdoc(options)
 
 const app = express()
 .use(cors())
-.use(bodyParser.json())
+.use(json())
 .use(categories(connection))
-.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+.use('/swagger', serve, setup(swaggerSpec))
 .use(items(connection));
 
 app.listen(port, () => {
-  console.log(`Express server listening on port ${port}`);
+  console.log(`Server stared: http://localhost:${port}`);
 });

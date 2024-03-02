@@ -1,10 +1,13 @@
+import { Connection } from "mysql";
+import { Request, Response, NextFunction } from 'express';
+
 const express = require("express");
 
-function createRouter(db) {
+function createRouter(db:Connection) {
   const router = express.Router();
   const owner = "";
 
-  router.post('/category', (req, res, next) => {
+  router.post('/category', (req: Request, res: Response, next: NextFunction) => {
     db.query(
       'INSERT INTO categories (name) VALUES (?)',
       [req.body.name],
@@ -19,10 +22,12 @@ function createRouter(db) {
     );
   });
 
-  router.get('/category', function (req, res, next) {
+  router.get('/category', function (req:Request, res:Response, next:NextFunction) {
+    const page: number = parseInt(req.params.page || '0', 10);
+    const result = 10 * page;
     db.query(
       'SELECT id, name FROM categories ORDER BY name LIMIT 10 OFFSET ?',
-      [10 * (req.params.page || 0)],
+      [10 * result],
       (error, results) => {
         if (error) {
           console.log(error);
@@ -34,7 +39,7 @@ function createRouter(db) {
     );
   });
 
-  router.put('/category/:id', function (req, res, next) {
+  router.put('/category/:id', function (req: Request, res: Response, next: NextFunction) {
     db.query(
       'UPDATE categories SET name=? WHERE id=?',
       [req.body.name, req.params.id],
@@ -48,7 +53,7 @@ function createRouter(db) {
     );
   });
 
-  router.delete('/category/:id', function (req, res, next) {
+  router.delete('/category/:id', function (req: Request, res: Response, next: NextFunction) {
     db.query(
       'DELETE FROM categories WHERE id=?',
       [req.params.id],
@@ -64,5 +69,4 @@ function createRouter(db) {
 
   return router;
 }
-
-module.exports = createRouter;
+export {createRouter as categories};
