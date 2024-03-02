@@ -32,6 +32,11 @@ const Navbar: FC<NavbarProps> = ({}) => {
             >
                 Nomenclatures
             </Button>
+            <Button
+            color="secondary"
+            href={'/fitness'}>
+                Fitness
+            </Button>
         </Toolbar>
 
     </AppBar>)
