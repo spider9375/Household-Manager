@@ -1,4 +1,4 @@
-import {effect, Injectable, signal} from "@angular/core";
+import {computed, effect, Injectable, signal} from "@angular/core";
 
 export enum Theme {
     Dark = "dark",
@@ -9,7 +9,10 @@ export enum Theme {
     providedIn: "root"
 })
 export class ThemeService {
-    theme = signal<Theme>(localStorage.getItem("theme") ? localStorage.getItem("theme") as Theme : Theme.Dark);
+    private theme = signal<Theme>(localStorage.getItem("theme") ? localStorage.getItem("theme") as Theme : Theme.Dark);
+
+    themeClass = computed(() => `${this.theme()}-theme`);
+    activeTheme = computed(() => this.theme());
 
     constructor() {
         effect(() => {

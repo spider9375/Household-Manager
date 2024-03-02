@@ -1,5 +1,5 @@
 <mat-label>Light</mat-label>
-<mat-slide-toggle class="px-2" hideIcon [checked]="themeService.theme() === Theme.Dark"
+<mat-slide-toggle class="px-2" hideIcon [checked]="themeService.activeTheme() === Theme.Dark"
                   (toggleChange)="themeService.toggleTheme()"></mat-slide-toggle>
 
 <mat-label>Dark</mat-label>

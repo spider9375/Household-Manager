@@ -11,6 +11,7 @@ import {CategoryDialogComponent} from "./dialogs/category-dialog/category-dialog
 import {ICategory} from "./models/category.model";
 import {filter, tap} from "rxjs";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {ThemeService} from "../../core/theme/theme.service";
 
 @Component({
     selector: 'app-categories',
@@ -30,6 +31,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 })
 export class CategoriesComponent implements OnInit {
     service = inject(CategoryService)
+    themeService = inject(ThemeService);
     categories: ICategory[] = [];
     loading = true;
     dialog = inject(MatDialog);
@@ -39,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     }
 
     openDialog(category?: ICategory): void {
-        const ref = this.dialog.open(CategoryDialogComponent, {data: {category},})
+        const ref = this.dialog.open(CategoryDialogComponent, {data: {category},panelClass: this.themeService.themeClass()})
 
         ref.afterClosed().pipe(
             filter(x => !!x),
