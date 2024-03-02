@@ -10,6 +10,7 @@ import Root from "./routes/Root.tsx";
 import Layout from "./Layout.tsx";
 import Nomenclatures from "./nomenclatures/Nomenclatures.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
+import Fitness from './fitness/Fitness.tsx';
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: "/nomenclatures",
         Component: Nomenclatures
+    },
+    {
+        path: '/fitness',
+        Component: Fitness
     }
 ]);
 
