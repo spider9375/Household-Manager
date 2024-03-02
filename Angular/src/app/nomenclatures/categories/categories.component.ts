@@ -48,9 +48,13 @@ export class CategoriesComponent implements OnInit {
             tap(((payload: ICategory) => {
                 this.loading = true;
                 if (category?.id) {
-                    this.service.updateCategory(payload).subscribe()
+                    this.service.updateCategory(payload).subscribe(() => {
+                        this.getCategories();
+                    })
                 } else {
-                    this.service.createCategory(payload).subscribe()
+                    this.service.createCategory(payload).subscribe(() => {
+                        this.getCategories();
+                    })
                 }
             })),
             tap(() => this.getCategories())).subscribe();
