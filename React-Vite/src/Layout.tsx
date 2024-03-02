@@ -1,6 +1,6 @@
 import './App.css'
 import {FC, memo, ReactNode} from "react";
-import Navbar from './core/navbar/Navbar';
+import Navbar from './components/navbar/Navbar';
 import {createTheme} from "@mui/material";
 
 interface LayoutProps {
