@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -8,10 +9,10 @@ const categories = require('./routes/categories');
 const items = require('./routes/items');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'test-inventory',
-  password: '112233',
-  database: 'homeInventory'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 connection.connect();
