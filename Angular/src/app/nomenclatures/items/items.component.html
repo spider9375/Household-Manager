@@ -1,1 +1,7 @@
-<p>items works!</p>
+<mat-toolbar>
+  <button mat-button color="success" (click)="openModal()">Create item</button>
+</mat-toolbar>
+<app-items-table [items]="items"
+                 (delete)="delete($event)"
+                 (edit)="openModal($event)">
+</app-items-table>

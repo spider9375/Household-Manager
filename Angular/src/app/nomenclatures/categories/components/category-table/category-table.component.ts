@@ -5,7 +5,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {NgComponentOutlet, NgTemplateOutlet} from "@angular/common";
-import {TableComponent} from "../../../../shared/components/table/table/table.component";
+import {TableComponent} from "../../../../shared/components/table/table.component";
 import {ICategory} from "../../models/category.model";
 import {MatIconModule} from "@angular/material/icon";
 

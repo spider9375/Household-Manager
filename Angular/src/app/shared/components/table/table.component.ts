@@ -20,4 +20,8 @@ export class TableComponent {
     @Input({required: true}) dataSource: any[] = []
     @Input({required: true}) columns: string[] = []
     @Input() actionColumnTemplate: TemplateRef<any> | null = null;
+
+    public get dataColumns() {
+        return this.columns.filter(c => c !== "actions")
+    }
 }
