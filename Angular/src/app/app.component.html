@@ -1,9 +1,27 @@
-<div class="mat-app-background" [ngClass]="themeService.themeClass()">
-  <app-navbar></app-navbar>
+<div class="flex p-4 bg-gray-100">
+  <aside class="sidebar">
+    <div class="flex flex-col gap-1">
+      <div class="flex items-center justify-center pt-2">
+        <span class="text-white">MBT</span>
+      </div>
+      <hr>
+      @for (link of links; track link.route) {
+        <a mat-button
+           class="nav-item"
+           [routerLinkActive]="'active'"
+           [routerLink]="link.route">
+          <mat-icon>{{ link.icon }}</mat-icon>
+          {{ link.label }}</a>
+      }
+    </div>
+
+  </aside>
   <main class="overflow-auto">
     <router-outlet></router-outlet>
   </main>
 </div>
+
+
 
 
 
