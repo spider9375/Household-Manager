@@ -1,6 +1,9 @@
+import { Connection } from "mysql";
+import { Request, Response, NextFunction } from 'express';
+
 const express = require("express");
 
-function createRouter(db) {
+function createRouter(db:Connection) {
   const router = express.Router();
   const owner = "";
 
@@ -28,7 +31,7 @@ function createRouter(db) {
    *       200:
    *         description: Returns ok.
    */
-  router.post('/item', (req, res, next) => {
+  router.post('/item', (req: Request, res: Response, next:NextFunction) => {
     db.query(
       'INSERT INTO items (name, categoryId) VALUES (?, ?)',
       [req.body.name, req.body.categoryId],
@@ -43,10 +46,12 @@ function createRouter(db) {
     );
   });
 
-  router.get('/item', function (req, res, next) {
+  router.get('/item', function (req: Request, res: Response, next:NextFunction) {
+    const page: number = parseInt(req.params.page || '0', 10);
+    const result = 10 * page;
     db.query(
       'SELECT id, name FROM items ORDER BY name LIMIT 10 OFFSET ?',
-      [10 * (req.params.page || 0)],
+      [10 * result],
       (error, results) => {
         if (error) {
           console.log(error);
@@ -58,7 +63,7 @@ function createRouter(db) {
     );
   });
 
-  router.get('/item/:id', function (req, res, next) {
+  router.get('/item/:id', function (req: Request, res: Response, next:NextFunction) {
     db.query(
       'SELECT id, name, categoryId FROM items WHERE id=?',
       [req.params.id],
@@ -75,7 +80,7 @@ function createRouter(db) {
     );
   });
 
-  router.put('/item/:id', function (req, res, next) {
+  router.put('/item/:id', function (req: Request, res: Response, next:NextFunction) {
     db.query(
       'UPDATE items SET name=?, categoryId=? WHERE id=?',
       [req.body.name, req.body.categoryId, req.params.id],
@@ -89,7 +94,7 @@ function createRouter(db) {
     );
   });
 
-  router.delete('/item/:id', function (req, res, next) {
+  router.delete('/item/:id', function (req: Request, res: Response, next: NextFunction) {
     db.query(
       'DELETE FROM items WHERE id=?',
       [req.params.id],
@@ -106,4 +111,4 @@ function createRouter(db) {
   return router;
 }
 
-module.exports = createRouter;
+export {createRouter as items};
