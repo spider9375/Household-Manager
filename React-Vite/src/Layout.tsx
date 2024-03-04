@@ -19,10 +19,10 @@ const Layout: FC<LayoutProps> = ({children}) => {
     })
 
   return (
-    <>
+    <div>
         <Navbar></Navbar>
-        {children}
-    </>
+        <div style={{paddingTop: '70px'}}>{children}</div>
+    </div>
   )
 }
 
