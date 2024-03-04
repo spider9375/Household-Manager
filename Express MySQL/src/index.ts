@@ -15,7 +15,22 @@ const connection = createConnection({
   database: process.env.DB_NAME
 });
 
-connection.connect();
+var rdsConnection = createConnection({
+  host: process.env.RDS_HOSTNAME,
+  user: process.env.RDS_USERNAME,
+  password: process.env.RDS_PASSWORD,
+  port: parseInt(process.env.RDS_PORT || '') || 3306,
+  database: process.env.RDS_DB_NAME,
+});
+
+rdsConnection.connect((err) => {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
+  console.log('Connected to database.');
+});
+
 
 const port = process.env.PORT || 8080;
 
@@ -36,9 +51,9 @@ const swaggerSpec = swaggerJsdoc(options)
 const app = express()
 .use(cors())
 .use(json())
-.use(categories(connection))
+.use(categories(rdsConnection))
 .use('/swagger', serve, setup(swaggerSpec))
-.use(items(connection));
+.use(items(rdsConnection));
 
 app.listen(port, () => {
   console.log(`Server stared: http://localhost:${port}`);
