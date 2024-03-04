@@ -1,11 +1,11 @@
-import {Connection} from "mysql";
-import {NextFunction, Request, Response} from 'express';
+import { Connection } from 'mysql';
+import { NextFunction, Request, Response } from 'express';
 
-const express = require("express");
+const express = require('express');
 
 function createRouter(db: Connection) {
     const router = express.Router();
-    const owner = "";
+    const owner = '';
 
     /**
      * @openapi
@@ -38,9 +38,9 @@ function createRouter(db: Connection) {
             (error) => {
                 if (error) {
                     console.error(error);
-                    res.status(500).json({status: 'error', error});
+                    res.status(500).json({ status: 'error', error });
                 } else {
-                    res.status(200).json({status: 'ok'});
+                    res.status(200).json({ status: 'ok' });
                 }
             }
         );
@@ -55,7 +55,7 @@ function createRouter(db: Connection) {
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
                     res.status(200).json(results);
                 }
@@ -64,20 +64,16 @@ function createRouter(db: Connection) {
     });
 
     router.get('/item/:id', function (req: Request, res: Response, next: NextFunction) {
-        db.query(
-            'SELECT id, name, categoryId FROM items WHERE id=?',
-            [req.params.id],
-            (error, results) => {
-                if (error) {
-                    console.log(error);
-                    res.status(500).json({status: 'error'});
-                } else if (results.length === 1) {
-                    res.status(200).json(results[0]);
-                } else {
-                    res.status(404).json({});
-                }
+        db.query('SELECT id, name, categoryId FROM items WHERE id=?', [req.params.id], (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({ status: 'error' });
+            } else if (results.length === 1) {
+                res.status(200).json(results[0]);
+            } else {
+                res.status(404).json({});
             }
-        );
+        });
     });
 
     router.put('/item/:id', function (req: Request, res: Response, next: NextFunction) {
@@ -86,29 +82,25 @@ function createRouter(db: Connection) {
             [req.body.name, req.body.categoryId, req.params.id],
             (error) => {
                 if (error) {
-                    res.status(500).json({status: 'error', error});
+                    res.status(500).json({ status: 'error', error });
                 } else {
-                    res.status(200).json({status: 'ok'});
+                    res.status(200).json({ status: 'ok' });
                 }
             }
         );
     });
 
     router.delete('/item/:id', function (req: Request, res: Response, next: NextFunction) {
-        db.query(
-            'DELETE FROM items WHERE id=?',
-            [req.params.id],
-            (error) => {
-                if (error) {
-                    res.status(500).json({status: 'error', error});
-                } else {
-                    res.status(200).json({status: 'ok'});
-                }
+        db.query('DELETE FROM items WHERE id=?', [req.params.id], (error) => {
+            if (error) {
+                res.status(500).json({ status: 'error', error });
+            } else {
+                res.status(200).json({ status: 'ok' });
             }
-        );
+        });
     });
 
     return router;
 }
 
-export {createRouter as items};
+export { createRouter as items };
