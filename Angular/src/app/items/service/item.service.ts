@@ -8,7 +8,7 @@ export interface INode {
     children?: INode[]
 }
 
-const items: INode = {
+export const nodes: INode = {
     id: "root",
     name: "root",
     children: [
@@ -16,16 +16,19 @@ const items: INode = {
             id: "1",
             name: "Kitchen",
             type: "folder",
+            parentId: "root",
             children: [
                 {
                     id: "2",
                     type: "folder",
+                    parentId: "1",
                     name: "Fridge",
                     children: [
                         {
                             id: "item-2431asdf",
                             name: "Milk",
                             type: "item",
+                            parentId: "2"
                         }
                     ]
                 }
@@ -35,7 +38,7 @@ const items: INode = {
 }
 
 // Function to find a node in the tree recursively
-function findNode(root: INode | null, id: string): INode | null {
+export function findNode(root: INode | null, id: string): INode | null {
     if (!root) {
         return null; // Base case: reached the end of the tree without finding the node
     }
@@ -59,10 +62,10 @@ function findNode(root: INode | null, id: string): INode | null {
 @Injectable()
 export class ItemFolderService {
     getAllFolders() {
-        return items.children!;
+        return nodes!;
     }
 
-    getFolderContent(id: string) {
-        return findNode(items, id)!;
+    getFolderContent(id: string): INode {
+        return findNode(nodes, id)!;
     }
 }

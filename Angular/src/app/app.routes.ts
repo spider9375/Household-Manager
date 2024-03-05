@@ -23,7 +23,10 @@ export const routes: Routes = [
     {
         path: "items",
         component: ItemsComponent,
-        loadChildren: () => import("./items/items.routes").then(x => x.routes),
+    },
+    {
+        path: "items/:id",
+        component: ItemsComponent,
     },
     {path: "", pathMatch: "full", redirectTo: "dashboard"},
 

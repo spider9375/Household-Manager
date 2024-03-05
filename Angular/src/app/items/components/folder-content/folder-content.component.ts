@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {TableComponent} from "@shared";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ItemFolderService} from "../../service/item.service";
+import {INode, ItemFolderService} from "../../service/item.service";
 
 @Component({
     selector: 'app-folder-content',
@@ -17,15 +17,15 @@ export class FolderContentComponent implements OnInit {
     route = inject(ActivatedRoute)
     router = inject(Router);
 
-    content: any;
+    content!: INode;
 
-    ngOnInit() {
+    /*ngOnInit() {
         this.route.paramMap.subscribe((paramsMap) => {
             if (paramsMap.has('id')) {
-                this.content = this.service.getFolderContent(paramsMap.get('id')!);
-                console.log(this.content);
+                //this.content = this.service.getFolderContent(paramsMap.get('id')!);
+                //console.log(this.content);
             }
         })
-    }
+    }*/
 
 }

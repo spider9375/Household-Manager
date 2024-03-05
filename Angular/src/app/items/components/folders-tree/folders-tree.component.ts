@@ -1,11 +1,11 @@
-import {Component, input, OnInit} from '@angular/core';
+import {Component, effect, input, OnInit} from '@angular/core';
 import {MatTreeModule, MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconButton} from "@angular/material/button";
-import {INode} from "../../service/item.service";
+import {findNode, INode} from "../../service/item.service";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -27,10 +27,29 @@ export class FoldersTreeComponent implements OnInit {
     treeControl = new NestedTreeControl<INode>(node => node.children);
     dataSource = new MatTreeNestedDataSource<INode>();
 
-    folders = input.required<INode[]>();
+    node = input.required<INode>();
+    activeNodeId = input<string>();
+
+    recur = (node: INode) => {
+        this.treeControl.expand(node);
+        if (node.parentId) {
+            this.recur(findNode(this.node(), node.parentId)!);
+        }
+    }
+
+    constructor() {
+        effect(() => {
+            if (this.activeNodeId()) {
+                this.treeControl.collapseAll();
+                this.recur(findNode(this.node(), this.activeNodeId()!)!)
+            }
+        });
+
+    }
+
 
     ngOnInit() {
-        this.dataSource.data = this.folders();
+        this.dataSource.data = this.node().children!;
     }
 
     hasChild = (_: number, node: INode) => !!node.children && node.children.length > 0;

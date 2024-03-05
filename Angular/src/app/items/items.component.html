@@ -1,4 +1,4 @@
 <div class="flex h-full w-full">
-  <app-folders-tree [folders]="service.getAllFolders()"></app-folders-tree>
-  <router-outlet></router-outlet>
+  <app-folders-tree [node]="service.getAllFolders()" [activeNodeId]="content.id"></app-folders-tree>
+  <app-folder-content></app-folder-content>
 </div>
