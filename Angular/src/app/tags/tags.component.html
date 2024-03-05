@@ -1,0 +1,15 @@
+<mat-sidenav-container class="drawer">
+    <mat-sidenav mode="side" opened class="p-4">
+      <div class="flex flex-col gap-3">
+        @for (tag of tags; track $index) {
+            <a mat-flat-button routerLinkActive="active"
+            [routerLink]="['./',tag.id]">{{tag.name}} ./{{tag.id}}</a>
+        }
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content class="p-4 h-full overflow-hidden">
+      <router-outlet/>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
