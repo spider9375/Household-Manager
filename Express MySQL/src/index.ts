@@ -9,29 +9,20 @@ import { categories } from './routes/categories';
 import { items } from './routes/items';
 
 const connection = createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-});
-
-var rdsConnection = createConnection({
-    host: process.env.RDS_HOSTNAME,
-    user: process.env.RDS_USERNAME,
-    password: process.env.RDS_PASSWORD,
+    host: process.env.DB_ENVIRONMENT == 'local' ? process.env.DB_HOST : process.env.RDS_HOSTNAME,
+    user: process.env.DB_ENVIRONMENT == 'local' ? process.env.DB_USER : process.env.RDS_USERNAME,
+    password: process.env.DB_ENVIRONMENT == 'local' ? process.env.DB_PASSWORD : process.env.RDS_PASSWORD,
+    database: process.env.DB_ENVIRONMENT == 'local' ? process.env.DB_NAME : process.env.RDS_DB_NAME,
     port: parseInt(process.env.RDS_PORT || '') || 3306,
-    database: process.env.RDS_DB_NAME,
 });
 
-rdsConnection.connect((err) => {
+connection.connect((err) => {
     if (err) {
         console.error('Database connection failed: ' + err.stack);
         return;
     }
     console.log('Connected to database.');
 });
-
-const port = process.env.PORT || 8080;
 
 const options = {
     failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
@@ -50,10 +41,11 @@ const swaggerSpec = swaggerJsdoc(options);
 const app = express()
     .use(cors())
     .use(json())
-    .use(categories(rdsConnection))
+    .use(categories(connection))
     .use('/swagger', serve, setup(swaggerSpec))
-    .use(items(rdsConnection));
+    .use(items(connection));
 
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Server stared: http://localhost:${port}`);
 });
