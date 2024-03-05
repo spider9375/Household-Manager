@@ -26,29 +26,32 @@ import { ICategory } from "./category.model";
 
 export default function Categories() {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [fetchCategories, setFetchCategories] = useState(true);
+  const [fetchCategories, setFetchCategories] = useState<boolean>(true);
   const [selectedCategoryDelete, setSelectedCategoryDelete] =
     useState<any>(null);
   const [selectedCategoryEdit, setSelectedCategoryEdit] = useState<any>(null);
-  const [empty, setIsEmpty] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
+
   const ref = useRef<HTMLInputElement>(null);
 
-  const handleAdd = useCallback(() => {
-    if (ref.current?.value === "") {
-      setIsEmpty(true);
-    } else {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: ref.current?.value }),
-      };
-      fetch("http://localhost:8080/category", requestOptions)
-        .then((response) => response.json())
-        .then(() => setFetchCategories(true));
-      setIsEmpty(false);
-      ref.current!.value = "";
+
+  const handleAdd = useCallback((categoryName: string) => {
+      if (categoryName) {
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: categoryName }),
+        };
+        fetch("http://localhost:8080/category", requestOptions)
+          .then((response) => response.json())
+          .then(() => setFetchCategories(true));
+        setOpenCreate(false);
+      }
+      setOpenCreate(false);
     }
-  }, []);
+  , []);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -70,9 +73,6 @@ export default function Categories() {
     handleClose();
   }, []);
 
-  const [open, setOpen] = useState<boolean>(false);
-  const [openEdit, setOpenEdit] = useState<boolean>(false);
-
   const handleEdit = useCallback((category: ICategory) => {
     fetch(`http://localhost:8080/category/${category.id}`, {
       method: "PUT",
@@ -81,41 +81,46 @@ export default function Categories() {
     }).then(() => setFetchCategories(true));
   }, []);
 
-  const handleCloseEdit = useCallback((category?: ICategory) => {
-    setOpenEdit(false);
-    if (category) {
-      handleEdit(category);
-    }
-  },[handleEdit]);
+  const handleCloseEdit = useCallback(
+    (category?: ICategory) => {
+      setOpenEdit(false);
+      setOpenCreate(false);
+      if (category) {
+        handleEdit(category);
+      }
+    },
+    [handleEdit]
+  );
 
   const handleOpenEdit = useCallback((category: ICategory) => {
-    setOpenEdit(true);
+    if(category.id) {
+      setOpenEdit(true);
+      setSelectedCategoryEdit(category);
+    } else {
+      setOpenEdit(true);
+    }
+
     setSelectedCategoryEdit(category);
-  },[]);
+  }, []);
+
+  const handleOpenCreate = useCallback(() => {
+    setOpenCreate(true);
+  }, []);
 
   const handleClose = useCallback(() => {
     setOpen(false);
-  },[]);
+  }, []);
 
   const handleOpen = useCallback((category: ICategory) => {
     setOpen(true);
     setSelectedCategoryDelete(category);
-  },[]);
+  }, []);
 
   return (
     <>
-      {empty && (
-        <Stack sx={{ width: "100%" }} spacing={2}>
-          <Alert severity="error">Please enter a name.</Alert>
-        </Stack>
-      )}
-      <Button onClick={handleAdd}>Add Category</Button>
-      <TextField
-        id="standard-basic"
-        label="Standard"
-        variant="standard"
-        inputRef={ref}
-      ></TextField>
+      <Button sx={{ paddingTop: "20px" }} onClick={handleOpenCreate}>
+        Add Category
+      </Button>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -125,28 +130,29 @@ export default function Categories() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categories.map((category) => (
-              <TableRow
-                key={category.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {category.name}
-                </TableCell>
-                <TableCell>
-                  <Tooltip title="Delete">
-                    <IconButton onClick={() => handleOpen(category)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Edit">
-                    <IconButton onClick={() => handleOpenEdit(category)}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+            {Array.isArray(categories) &&
+              categories.map((category) => (
+                <TableRow
+                  key={category.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {category.name}
+                  </TableCell>
+                  <TableCell>
+                    <Tooltip title="Delete">
+                      <IconButton onClick={() => handleOpen(category)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                      <IconButton onClick={() => handleOpenEdit(category)}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -179,27 +185,12 @@ export default function Categories() {
         onClose={handleCloseEdit}
         category={selectedCategoryEdit}
       />
-      {/* <Dialog
-        open={openEdit}
-        onClose={handleCloseEdit}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {`Edit ${selectedCategoryEdit?.name}`}
-        </DialogTitle>
-        <DialogContent >
-          <DialogContentText sx={{paddingTop: '5px'}} id="alert-dialog-description">
-            <TextField  label="Name" inputRef={editedName} />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleEdit(selectedCategoryEdit)} autoFocus>
-            Confirm
-          </Button>
-          <Button onClick={handleCloseEdit}>Cancel</Button>
-        </DialogActions>
-      </Dialog> */}
+      {/* <Modal
+        action="CREATE"
+        open={openCreate}
+        onClose={handleAdd}
+        category={selectedCategoryEdit}
+      /> */}
     </>
   );
 }
