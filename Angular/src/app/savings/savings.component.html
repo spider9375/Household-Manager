@@ -1,1 +1,9 @@
-<p>savings works!</p>
+<h1 class="text-xl pb-3">Savings</h1>
+<div class="flex flex-row gap-3">
+  @for (saving of savingsStore.savings(); track saving.id) {
+    <app-savings-card [saving]="saving"
+                      [tag]="savingsTagsStore.tagById()[saving.id]"
+    ></app-savings-card>
+  }
+</div>
+
