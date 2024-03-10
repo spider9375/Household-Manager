@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import {NomenclaturesComponent} from "./nomenclatures/nomenclatures.component";
+import {SavingsComponent} from "./savings/savings.component";
 
 export const routes: Routes = [
     {
@@ -18,6 +19,10 @@ export const routes: Routes = [
         path: "nomenclatures",
         component: NomenclaturesComponent,
         loadChildren: () => import("./nomenclatures/nomenclatures.routes").then(x => x.routes),
+    },
+    {
+        path: "savings",
+        component: SavingsComponent,
     },
     {path: "", pathMatch: "full", redirectTo: "dashboard"},
 
