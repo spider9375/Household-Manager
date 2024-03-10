@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import {NomenclaturesComponent} from "./nomenclatures/nomenclatures.component";
+import {SavingsComponent} from "./savings/savings.component";
 import {ItemsComponent} from "./items/items.component";
 
 export const routes: Routes = [
@@ -27,6 +28,10 @@ export const routes: Routes = [
     {
         path: "items/:id",
         component: ItemsComponent,
+    },
+    {
+        path: "savings",
+        component: SavingsComponent,
     },
     {path: "", pathMatch: "full", redirectTo: "dashboard"},
 
