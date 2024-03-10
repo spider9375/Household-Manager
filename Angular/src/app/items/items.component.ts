@@ -4,6 +4,10 @@ import {FoldersTreeComponent} from "./components/folders-tree/folders-tree.compo
 import {INode, ItemFolderService} from "./service/item.service";
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {FolderContentComponent} from "./components/folder-content/folder-content.component";
+import {MatButton} from "@angular/material/button";
+import {ItemService} from "../nomenclatures/items/services/item.service";
+import {AsyncPipe} from "@angular/common";
+import {IItem} from "../nomenclatures/items/models/item.model";
 
 @Component({
     selector: 'app-items',
@@ -12,25 +16,34 @@ import {FolderContentComponent} from "./components/folder-content/folder-content
         MatTree,
         FoldersTreeComponent,
         RouterOutlet,
-        FolderContentComponent
+        FolderContentComponent,
+        MatButton,
+        AsyncPipe
     ],
-    providers: [ItemFolderService],
     templateUrl: './items.component.html',
     styleUrl: './items.component.scss'
 })
 export class ItemsComponent implements OnInit {
-    service = inject(ItemFolderService)
+
+    folderService = inject(ItemFolderService)
+    itemsService = inject(ItemService);
     route = inject(ActivatedRoute)
     router = inject(Router);
+
+    items!: IItem[]
 
     content!: INode;
 
     ngOnInit() {
         this.route.paramMap.subscribe((paramsMap) => {
-            if (paramsMap.has('id')) {
-                this.content = this.service.getFolderContent(paramsMap.get('id')!);
-                console.log(this.content);
-            }
+            this.content = this.folderService.getFolderContent(paramsMap.get('id')!);
+            console.log(this.folderService.getAllFolders());
         })
+
+        this.itemsService.getAll().subscribe(items => this.items = items);
+    }
+
+    openDialog() {
+
     }
 }

@@ -1,4 +1,15 @@
 <div class="flex h-full w-full">
-  <app-folders-tree [node]="service.getAllFolders()" [activeNodeId]="content.id"></app-folders-tree>
-  <app-folder-content></app-folder-content>
+  <app-folders-tree [node]="folderService.getAllFolders()" [activeNodeId]="content.id"></app-folders-tree>
+  <div class="flex flex-col gap-3 w-full">
+    <div class="header flex flex-row justify-between">
+      <div class="breadcrumbs">
+
+      </div>
+      <div>
+        <button mat-flat-button color="primary" (click)="openDialog()">Add item</button>
+      </div>
+    </div>
+    <app-folder-content [items]="items"></app-folder-content>
+  </div>
 </div>
+

@@ -1,4 +1,4 @@
-import {Component, effect, input, OnInit} from '@angular/core';
+import {Component, input, OnInit} from '@angular/core';
 import {MatTreeModule, MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatIconModule} from "@angular/material/icon";
@@ -37,20 +37,14 @@ export class FoldersTreeComponent implements OnInit {
         }
     }
 
-    constructor() {
-        effect(() => {
-            if (this.activeNodeId()) {
-                this.treeControl.collapseAll();
-                this.recur(findNode(this.node(), this.activeNodeId()!)!)
-            }
-        });
-
-    }
-
-
     ngOnInit() {
         this.dataSource.data = this.node().children!;
+
+        if (this.activeNodeId()) {
+            this.treeControl.collapseAll();
+            this.recur(findNode(this.node(), this.activeNodeId()!)!)
+        }
     }
 
-    hasChild = (_: number, node: INode) => !!node.children && node.children.length > 0;
+    hasChild = (_: number, node: INode) => (node.children ?? []).filter(c => c.type === "folder").length > 0;
 }

@@ -5,7 +5,9 @@ import {Observable} from "rxjs";
 import {ICategory} from "../../categories/models/category.model";
 import {IItem} from "../models/item.model";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export class ItemService {
     http = inject(HttpClient);
 

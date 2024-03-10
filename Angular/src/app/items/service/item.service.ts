@@ -58,14 +58,34 @@ export function findNode(root: INode | null, id: string): INode | null {
     return null; // Node not found in this subtree
 }
 
+export function getFolderNodes(root: INode): INode[] {
+    if (!root) {
+        return []
+    }
 
-@Injectable()
+    for (const child of root.children!) {
+        const result = getFolderNodes(child);
+        if (result) {
+            return result; // Return the result if found in the child subtree
+        }
+    }
+
+    if (root.type === 'folder') {
+        return [root]
+    }
+
+    return [];
+}
+
+@Injectable({
+    providedIn: "root"
+})
 export class ItemFolderService {
     getAllFolders() {
         return nodes!;
     }
 
     getFolderContent(id: string): INode {
-        return findNode(nodes, id)!;
+        return id ? findNode(nodes, id)! : nodes;
     }
 }
