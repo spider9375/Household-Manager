@@ -1,0 +1,19 @@
+<div #savingCard class="card rounded-2xl bg-white flex flex-col items-center gap-3 p-5 h-full" style="width: 200px">
+  <div class="icon">
+    <mat-icon>{{ saving().icon }}</mat-icon>
+  </div>
+  <div class="tag text-sm">
+    {{ tag()?.name }}
+  </div>
+  <div class="title font-medium">
+    {{ saving().name }}
+  </div>
+  @if (saving().goal) {
+    <progress id="file" [value]="progress()" max="100"></progress>
+  } @else {
+    <progress class="invisible"></progress>
+  }
+  <div class="balance text-slate-400">{{ formattedAmount() }}</div>
+</div>
+
+
