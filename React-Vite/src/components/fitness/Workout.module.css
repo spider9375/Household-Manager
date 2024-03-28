@@ -1,0 +1,55 @@
+.workoutContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.workoutHeading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.workoutSet {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.workoutLabel {
+  padding: 10px;
+}
+
+.workoutData {
+  padding: 10px;
+}
+.reps {
+  width: -10%;
+}
+
+.prevs{
+  color: rgb(163, 155, 142);
+}
+
+.setCol,
+.kgCol,
+.repsCol,
+.prevCol {
+  font: -webkit-control;
+  color: rgb(163, 155, 142);
+}
+
+.specialW {
+  color: rgb(252, 180, 65);
+}
+
+.specialF {
+  color: rgb(247, 71, 58);
+
+}
+
+.highlightRow {
+  background-color: rgba(5, 109, 5, 0.281); /* Transparent green background */
+}

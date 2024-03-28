@@ -185,12 +185,11 @@ export default function Categories() {
         onClose={handleCloseEdit}
         category={selectedCategoryEdit}
       />
-      {/* <Modal
-        action="CREATE"
+      <Modal
         open={openCreate}
         onClose={handleAdd}
         category={selectedCategoryEdit}
-      /> */}
+      />
     </>
   );
 }
