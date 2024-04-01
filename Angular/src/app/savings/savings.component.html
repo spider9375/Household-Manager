@@ -1,8 +1,10 @@
 <h1 class="text-xl pb-3">Savings</h1>
+<button mat-flat-button class="mat-success" (click)="openModal()">Add</button>
 <div class="flex flex-row gap-3">
   @for (saving of savingsStore.savings(); track saving.id) {
     <app-savings-card [saving]="saving"
-                      [tag]="savingsTagsStore.tagById()[saving.id]"
+                      [tag]="tagsStore.tagById()[saving.tag]"
+                      (edit)="openModal(saving)"
     ></app-savings-card>
   }
 </div>

@@ -1,46 +1,37 @@
-import {computed, Injectable, signal} from "@angular/core";
-
-export interface ISaving {
-    id: string,
-    icon: string
-    tag: string,
-    amount: number
-    goal?: number
-    name: string
-    currency: string,
-}
+import {computed, inject, Injectable, signal} from "@angular/core";
+import {ISaving} from "./models";
+import {SavingsService} from "./savings.service";
+import {map, Subject, switchMap, tap} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class SavingsStore {
-    private _savings = signal<ISaving[]>([
-        {
-            id: "1",
-            name: "Emergency fund",
-            tag: "1",
-            amount: 10_000,
-            goal: 10_000,
-            icon: "thunderstorm",
-            currency: "BGN"
-        },
-        {
-            id: "2",
-            name: "Cash",
-            tag: "2",
-            icon: "payments",
-            amount: 5_000,
-            currency: "BGN"
-        },
-        {
-            id: "3",
-            name: "Eur",
-            tag: "3",
-            icon: "euro",
-            amount: 2_500,
-            currency: "EUR"
-        }
-    ])
+    private service = inject(SavingsService)
+    private _savings = signal<ISaving[]>([])
 
     savings = computed(() => this._savings());
+
+    fetch$ = this.service.getAll();
+    create$ = new Subject<ISaving>()
+    update$ = new Subject<ISaving>()
+    delete$ = new Subject<string>();
+
+    constructor() {
+        this.fetch$.subscribe(res => this._savings.set(res));
+        this.create$.pipe(
+            switchMap(payload => this.service.create(payload)),
+            tap(res => this._savings.update(prev => [...prev, res]))
+        ).subscribe();
+
+        this.update$.pipe(
+            switchMap(payload => this.service.update(payload)),
+            tap(res => this._savings.update(prev => prev.map(s => s.id === res.id ? res : s)))
+        ).subscribe();
+
+        this.delete$.pipe(
+            switchMap(id => this.service.delete(id).pipe(map(() => id))),
+            tap((id) => this._savings.update(prev => prev.filter(s => s.id !== id)))
+        ).subscribe()
+    }
 }

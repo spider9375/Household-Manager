@@ -1,9 +1,9 @@
-import {Component, computed, effect, ElementRef, input, ViewChild} from '@angular/core';
+import {Component, computed, effect, ElementRef, EventEmitter, input, Output, ViewChild} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatChip} from "@angular/material/chips";
-import {ISaving} from "../../savings.store";
-import {ISavingTag} from "../../saving-tags.store";
+import {ITag} from "../../../core/models";
+import {ISaving} from "../../models";
 
 @Component({
     selector: 'app-savings-card',
@@ -18,7 +18,7 @@ import {ISavingTag} from "../../saving-tags.store";
 })
 export class SavingsCardComponent {
     @ViewChild("savingCard", {read: ElementRef}) card!: ElementRef<HTMLDivElement>;
-    tag = input<ISavingTag>();
+    tag = input<ITag>();
     saving = input.required<ISaving>();
     formatter = computed(() => new Intl.NumberFormat("bg", {
         style: 'currency',
@@ -27,6 +27,8 @@ export class SavingsCardComponent {
     }))
     formattedAmount = computed(() => this.formatter().format(this.saving().amount))
     progress = computed(() => this.saving().goal && this.saving().amount / this.saving().goal! * 100);
+
+    @Output() edit = new EventEmitter();
 
     constructor() {
         effect(() => {

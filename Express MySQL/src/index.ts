@@ -1,12 +1,14 @@
-require('dotenv').config();
+import {savings} from "./routes/savings";
 import express from 'express';
-import { serve, setup } from 'swagger-ui-express';
+import {serve, setup} from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import cors from 'cors';
-import { json } from 'body-parser';
-import { Connection, createConnection } from 'mysql';
-import { categories } from './routes/categories';
-import { items } from './routes/items';
+import {json} from 'body-parser';
+import {createConnection} from 'mysql';
+import {tags} from "./routes/tags";
+import {items} from './routes/items';
+
+require('dotenv').config();
 
 const connection = createConnection({
     host: process.env.DB_ENVIRONMENT == 'local' ? process.env.DB_HOST : process.env.RDS_HOSTNAME,
@@ -41,8 +43,9 @@ const swaggerSpec = swaggerJsdoc(options);
 const app = express()
     .use(cors())
     .use(json())
-    .use(categories(connection))
     .use('/swagger', serve, setup(swaggerSpec))
+    .use(tags(connection))
+    .use(savings(connection))
     .use(items(connection));
 
 const port = process.env.PORT || 8080;

@@ -1,18 +1,37 @@
 import {Component, inject} from '@angular/core';
 import {SavingsCardComponent} from "./components/savings-card/savings-card.component";
 import {SavingsStore} from "./savings.store";
-import {SavingsTagsStore} from "./saving-tags.store";
+import {TagsStore} from "../core/stores/tags.store";
+import {MatButton} from "@angular/material/button";
+import {MatDialog} from "@angular/material/dialog";
+import {SavingDialogComponent} from "./dialogs/saving-dialog/saving-dialog.component";
+import {filter, take, tap} from "rxjs";
+import {ISaving} from "./models";
 
 @Component({
     selector: 'app-savings',
     standalone: true,
     imports: [
-        SavingsCardComponent
+        SavingsCardComponent,
+        MatButton
     ],
     templateUrl: './savings.component.html',
     styleUrl: './savings.component.scss'
 })
 export class SavingsComponent {
     savingsStore = inject(SavingsStore);
-    savingsTagsStore = inject(SavingsTagsStore);
+    tagsStore = inject(TagsStore);
+    matDialog = inject(MatDialog);
+
+    openModal(saving?: ISaving): void {
+        const ref = this.matDialog.open(SavingDialogComponent, {data: {saving}})
+
+        ref.afterClosed().pipe(take(1), filter(x => !!x), tap((saving: ISaving) => {
+            if (!saving.id) {
+                return this.savingsStore.create$.next(saving)
+            } else {
+                return this.savingsStore.update$.next(saving)
+            }
+        })).subscribe();
+    }
 }
