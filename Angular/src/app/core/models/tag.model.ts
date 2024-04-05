@@ -1,5 +1,5 @@
 export interface ITag {
-    id: string
+    id: number
     name: string
     color: string
 }

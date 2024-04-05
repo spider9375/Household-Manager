@@ -10,7 +10,7 @@ import {TagsStore} from "../../../core/stores/tags.store";
 import {CurrencyStore} from "../../../core/stores/currency.store";
 
 export interface ISavingForm extends FormGroup<{
-    id: FormControl<string>,
+    id: FormControl<number>,
     icon: FormControl<string>
     tag: FormControl<string>,
     amount: FormControl<number>

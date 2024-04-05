@@ -1,5 +1,5 @@
 export interface ISaving {
-    id: string,
+    id: number,
     icon: string
     tag: string,
     amount: number

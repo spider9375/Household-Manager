@@ -9,7 +9,7 @@ import {environment} from "../../environments/environment";
 })
 export class SavingsService {
     private http = inject(HttpClient)
-    private url = `${environment.serverUrl}/savings`
+    private url = `${environment.serverUrl}/api/savings`
 
 
     get(id: string): Observable<ISaving> {
@@ -28,7 +28,7 @@ export class SavingsService {
         return this.http.put<ISaving>(`${this.url}/${payload.id}`, payload);
     }
 
-    delete(id: string): Observable<void> {
+    delete(id: number): Observable<void> {
         return this.http.delete<void>(`${this.url}/${id}`);
     }
 }

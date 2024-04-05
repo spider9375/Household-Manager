@@ -2,7 +2,6 @@ import {inject, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {ICategory} from "../../nomenclatures/categories/models/category.model";
 import {ITag} from "../models";
 
 @Injectable({
@@ -11,7 +10,7 @@ import {ITag} from "../models";
 export class TagsService {
     http = inject(HttpClient);
 
-    private url = `${environment.serverUrl}/tags`
+    private url = `${environment.serverUrl}/api/tags`
 
     get(id: string): Observable<ITag> {
         return this.http.get<ITag>(`${this.url}/${id}`)
@@ -21,11 +20,11 @@ export class TagsService {
         return this.http.get<ITag[]>(`${this.url}`)
     }
 
-    create(payload: Partial<ITag>): Observable<ICategory> {
+    create(payload: Partial<ITag>): Observable<ITag> {
         return this.http.post<ITag>(this.url, payload);
     }
 
-    update(payload: Partial<ITag>): Observable<ICategory> {
+    update(payload: Partial<ITag>): Observable<ITag> {
         return this.http.put<ITag>(`${this.url}/${payload.id}`, payload);
     }
 

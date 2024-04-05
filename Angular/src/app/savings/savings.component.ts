@@ -7,13 +7,15 @@ import {MatDialog} from "@angular/material/dialog";
 import {SavingDialogComponent} from "./dialogs/saving-dialog/saving-dialog.component";
 import {filter, take, tap} from "rxjs";
 import {ISaving} from "./models";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
     selector: 'app-savings',
     standalone: true,
     imports: [
         SavingsCardComponent,
-        MatButton
+        MatButton,
+        MatIcon,
     ],
     templateUrl: './savings.component.html',
     styleUrl: './savings.component.scss'

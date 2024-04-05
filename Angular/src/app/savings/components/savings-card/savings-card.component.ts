@@ -29,6 +29,7 @@ export class SavingsCardComponent {
     progress = computed(() => this.saving().goal && this.saving().amount / this.saving().goal! * 100);
 
     @Output() edit = new EventEmitter();
+    @Output() delete = new EventEmitter()
 
     constructor() {
         effect(() => {

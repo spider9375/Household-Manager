@@ -15,7 +15,7 @@ export class SavingsStore {
     fetch$ = this.service.getAll();
     create$ = new Subject<ISaving>()
     update$ = new Subject<ISaving>()
-    delete$ = new Subject<string>();
+    delete$ = new Subject<number>();
 
     constructor() {
         this.fetch$.subscribe(res => this._savings.set(res));
