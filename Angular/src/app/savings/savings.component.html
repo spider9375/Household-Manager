@@ -1,9 +1,18 @@
-<h1 class="text-xl pb-3">Savings</h1>
+<div class="flex flex-row justify-between">
+  <h1 class="text-xl">Savings</h1>
+  <div>
+    <button mat-flat-button class="mat-primary my-3" (click)="openModal()">
+      <mat-icon>add</mat-icon>
+      Add Saving
+    </button>
+  </div>
+</div>
 <div class="flex flex-row gap-3">
   @for (saving of savingsStore.savings(); track saving.id) {
     <app-savings-card [saving]="saving"
-                      [tag]="savingsTagsStore.tagById()[saving.id]"
+                      [tag]="tagsStore.tagById()[saving.tag]"
+                      (delete)="savingsStore.delete$.next(saving.id)"
+                      (edit)="openModal(saving)"
     ></app-savings-card>
   }
 </div>
-

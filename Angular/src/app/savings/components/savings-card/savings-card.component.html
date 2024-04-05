@@ -1,4 +1,8 @@
 <div #savingCard class="card rounded-2xl bg-white flex flex-col items-center gap-3 p-5 h-full" style="width: 200px">
+  <div class="flex w-full flex-row justify-end">
+    <mat-icon class="hover:cursor-pointer hover:text-red-600 text-neutral-600" (click)="delete.emit()">delete</mat-icon>
+    <mat-icon class="hover:cursor-pointer hover:text-black text-neutral-600" (click)="edit.emit()">edit</mat-icon>
+  </div>
   <div class="icon">
     <mat-icon>{{ saving().icon }}</mat-icon>
   </div>
