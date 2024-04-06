@@ -7,7 +7,7 @@
       <hr>
       @for (link of links; track link.route) {
         <a mat-button
-           class="nav-item"
+           class="nav-item !text-white"
            [routerLinkActive]="'active'"
            [routerLink]="link.route">
           <mat-icon>{{ link.icon }}</mat-icon>

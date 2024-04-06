@@ -34,7 +34,7 @@
     }
 
     &.active {
-      background-color: mat.get-theme-color(theme.$dark-theme, primary);
+      background-color: hsla(0, 0%, 78%, .2);
     }
   }
 }

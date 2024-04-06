@@ -1,4 +1,6 @@
-@use '@angular/material' as mat;
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/*@use '@angular/material' as mat;
 
 @include mat.core();
 
@@ -22,4 +24,5 @@ $dark-theme: mat.define-dark-theme((
 .light-theme {
   @include mat.all-component-colors($light-theme);
   @include mat.all-component-densities($light-theme);
-}
+}*/
+
