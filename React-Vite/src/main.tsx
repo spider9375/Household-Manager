@@ -11,6 +11,7 @@ import Layout from "./Layout.tsx";
 import Nomenclatures from "./components/nomenclatures/Nomenclatures.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
 import Fitness from './components/fitness/Fitness.tsx';
+import Categories from './components/categories/Categories.tsx';
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: '/fitness',
         Component: Fitness
+    },
+    {
+        path: '/categories',
+        Component: Categories
     }
 ]);
 

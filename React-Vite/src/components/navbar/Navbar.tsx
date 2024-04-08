@@ -7,9 +7,8 @@ interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   return (
-    <AppBar>
+    <AppBar color="primary">
       <Toolbar className={classes.toolbar}>
-        <div className={classes.buttons}>
           <Button
             fullWidth={false}
             sx={{ m: 1, color: "white", display: "block" }}
@@ -28,15 +27,17 @@ const Navbar: FC<NavbarProps> = ({}) => {
           >
             INVENTORY
           </Button>
-          <Button color="secondary" href={"/nomenclatures"}>
+          <Button color="secondary" variant="contained" href={"/nomenclatures"}>
             Nomenclatures
           </Button>
-          <Button color="secondary" href={"/fitness"}>
+          <Button color="secondary" variant="contained" href={"/fitness"}>
             Fitness
           </Button>
-        </div>
+          <Button color="secondary" variant="contained" href={"/categories"}>
+            Categories
+          </Button>
         <div>
-          <DarkMode />
+          {/* <DarkMode /> */}
         </div>
       </Toolbar>
     </AppBar>
