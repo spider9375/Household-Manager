@@ -21,7 +21,7 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class ItemsTableComponent {
     dialog = inject(MatDialog);
-    columns = ['name', 'categoryId', 'actions']
+    columns = input.required<string[]>();
     items = input.required<IItem[]>();
     @Output() edit = new EventEmitter<IItem>();
     @Output() delete = new EventEmitter<IItem>();

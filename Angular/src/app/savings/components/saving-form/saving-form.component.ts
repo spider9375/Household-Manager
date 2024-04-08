@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, input, OnInit, Output} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import {ISaving} from "../../models";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
@@ -43,8 +43,6 @@ export class SavingFormComponent implements OnInit {
 
     form!: ISavingForm
 
-    @Output() ready = new EventEmitter<ISavingForm>();
-
     ngOnInit() {
         this.form = this.fb.nonNullable.group({
             id: this.saving()?.id!,
@@ -55,7 +53,5 @@ export class SavingFormComponent implements OnInit {
             name: [this.saving()?.name!, Validators.required],
             currency: [this.saving()?.currency!, Validators.required],
         })
-
-        this.ready.emit(this.form);
     }
 }

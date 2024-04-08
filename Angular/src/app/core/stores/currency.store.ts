@@ -6,11 +6,18 @@ import {IOptionItem} from "../../shared/models/option-item";
     providedIn: "root"
 })
 export class CurrencyStore {
-    private _currencies = signal<ICurrency[]>([{
-        name: "Bulgarian Lev",
-        code: "BGN",
-        postfix: "лв."
-    }])
+    private _currencies = signal<ICurrency[]>([
+        {
+            name: "Bulgarian Lev",
+            code: "BGN",
+            postfix: "лв."
+        },
+        {
+            name: "Euro",
+            code: "EUR",
+            symbol: "€"
+        }
+    ])
 
     currencyOptionItems = computed<IOptionItem[]>(() => this._currencies().map(c => ({value: c.code, title: c.code})))
 }

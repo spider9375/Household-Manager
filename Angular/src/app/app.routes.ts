@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {NomenclaturesComponent} from "./nomenclatures/nomenclatures.component";
 import {SavingsComponent} from "./savings/savings.component";
+import {TagsComponent} from "./tags/tags.component";
 
 export const routes: Routes = [
     {
@@ -23,6 +24,10 @@ export const routes: Routes = [
     {
         path: "savings",
         component: SavingsComponent,
+    },
+    {
+        path: "tags",
+        component: TagsComponent,
     },
     {path: "", pathMatch: "full", redirectTo: "dashboard"},
 

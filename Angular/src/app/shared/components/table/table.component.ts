@@ -1,6 +1,6 @@
-import {Component, Input, TemplateRef} from '@angular/core';
+import {Component, computed, input, Input, TemplateRef} from '@angular/core';
 import {MatTableModule} from "@angular/material/table";
-import {NgTemplateOutlet} from "@angular/common";
+import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 
@@ -12,16 +12,18 @@ import {MatPaginatorModule} from "@angular/material/paginator";
         NgTemplateOutlet,
         MatSortModule,
         MatPaginatorModule,
+        NgIf,
     ],
     templateUrl: './table.component.html',
     styleUrl: './table.component.scss'
 })
 export class TableComponent {
-    @Input({required: true}) dataSource: any[] = []
-    @Input({required: true}) columns: string[] = []
+    data = input.required<any[]>();
+    columns = input.required<string[]>();
+    customColumns = input<string[]>([]);
+    customColumnsTemplate = input<TemplateRef<any> | null>(null)
+    @Input() pagination: boolean = false;
     @Input() actionColumnTemplate: TemplateRef<any> | null = null;
 
-    public get dataColumns() {
-        return this.columns.filter(c => c !== "actions")
-    }
+    dataColumns = computed(() => this.columns().filter(c => c !== "actions"))
 }

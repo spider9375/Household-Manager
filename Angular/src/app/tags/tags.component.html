@@ -1,0 +1,31 @@
+<div class="flex flex-row justify-between">
+  <h1 class="text-xl">Tags</h1>
+  <div>
+    <button mat-flat-button class="mat-primary my-3" (click)="openModal()">
+      <mat-icon>add</mat-icon>
+      Add Tag
+    </button>
+  </div>
+</div>
+<app-table [columns]="columns"
+           [data]="tagStore.tags()"
+           [customColumns]="['color']"
+           [customColumnsTemplate]="custom"
+           [actionColumnTemplate]="actions"
+></app-table>
+
+<ng-template #custom let-item="item" let-col="col">
+  <ng-container *ngIf="col === 'color'">
+    <mat-chip disableRipple [ngStyle]="{backgroundColor: item.color, width: '6rem'}">{{ item.color ?? 'N/A' }}
+    </mat-chip>
+  </ng-container>
+</ng-template>
+
+<ng-template #actions let-item="item">
+  <mat-icon class="hover:cursor-pointer hover:text-black text-neutral-600" (click)="null">
+    edit
+  </mat-icon>
+  <mat-icon class="hover:cursor-pointer hover:text-red-600 text-neutral-600" (click)="null">
+    delete
+  </mat-icon>
+</ng-template>

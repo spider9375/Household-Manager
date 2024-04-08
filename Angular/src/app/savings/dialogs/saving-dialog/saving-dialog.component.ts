@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ISavingForm, SavingFormComponent} from "../../components/saving-form/saving-form.component";
 import {
     MAT_DIALOG_DATA,
@@ -24,26 +24,15 @@ import {MatButton} from "@angular/material/button";
     templateUrl: './saving-dialog.component.html',
     styleUrl: './saving-dialog.component.scss'
 })
-export class SavingDialogComponent implements OnInit {
+export class SavingDialogComponent {
     dialogData = inject(MAT_DIALOG_DATA)
     dialogRef = inject(MatDialogRef<SavingDialogComponent>)
 
-    form!: ISavingForm;
+    onConfirm(form: ISavingForm): void {
+        form.markAllAsTouched();
 
-
-    ngOnInit() {
-
-    }
-
-    onFormReady(form: ISavingForm) {
-        this.form = form;
-    }
-
-    onConfirm(): void {
-        this.form.markAllAsTouched();
-
-        if (this.form.valid) {
-            this.dialogRef.close(this.form.getRawValue());
+        if (form.valid) {
+            this.dialogRef.close(form.getRawValue());
         }
     }
 }
