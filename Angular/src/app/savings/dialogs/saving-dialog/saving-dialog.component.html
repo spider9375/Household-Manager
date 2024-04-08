@@ -1,8 +1,12 @@
-<h2 mat-dialog-title>Saving</h2>
+<div class="!flex !justify-between pt-3 px-3">
+  <span class="pl-3 select-none" [innerHTML]="title"></span>
+  <mat-icon class="cursor-pointer text-neutral-700 hover:text-black" [mat-dialog-close]="false">close</mat-icon>
+</div>
+
 <mat-dialog-content>
   <app-saving-form #form [saving]="dialogData.saving"></app-saving-form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onConfirm(form.form)">Confirm</button>
+<mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onConfirm(form.form)">Confirm</button>
 </mat-dialog-actions>

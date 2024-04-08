@@ -9,6 +9,8 @@ import {
     MatDialogTitle
 } from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {ISaving} from "../../models";
 
 @Component({
     selector: 'app-saving-dialog',
@@ -19,14 +21,23 @@ import {MatButton} from "@angular/material/button";
         MatDialogContent,
         MatDialogActions,
         MatButton,
-        MatDialogClose
+        MatDialogClose,
+        MatIcon
     ],
     templateUrl: './saving-dialog.component.html',
     styleUrl: './saving-dialog.component.scss'
 })
 export class SavingDialogComponent {
-    dialogData = inject(MAT_DIALOG_DATA)
+    dialogData: { saving: ISaving } = inject(MAT_DIALOG_DATA)
     dialogRef = inject(MatDialogRef<SavingDialogComponent>)
+
+    get title(): string {
+        if (this.dialogData?.saving?.id) {
+            return `<span class="text-neutral-500 text-xl font-light">Edit saving <span class="font-normal">${this.dialogData.saving.name}</span></span>`
+        }
+
+        return `<span class="text-neutral-500 text-xl font-light">Create saving</span>`;
+    }
 
     onConfirm(form: ISavingForm): void {
         form.markAllAsTouched();
