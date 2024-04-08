@@ -4,6 +4,8 @@ import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatChip} from "@angular/material/chips";
 import {ITag} from "../../../core/models";
 import {ISaving} from "../../models";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
     selector: 'app-savings-card',
@@ -11,7 +13,9 @@ import {ISaving} from "../../models";
     imports: [
         MatIcon,
         MatProgressBar,
-        MatChip
+        MatChip,
+        MatMenuModule,
+        MatTooltip,
     ],
     templateUrl: './savings-card.component.html',
     styleUrl: './savings-card.component.scss'

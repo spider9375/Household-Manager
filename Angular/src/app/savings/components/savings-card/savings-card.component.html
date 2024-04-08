@@ -1,11 +1,17 @@
-<div #savingCard class="card rounded-2xl bg-white flex flex-col items-center gap-3 p-5 h-full" style="width: 200px">
-  <div class="flex w-full flex-row justify-end">
-    <mat-icon class="hover:cursor-pointer hover:text-red-600 text-neutral-600" (click)="delete.emit()">delete</mat-icon>
-    <mat-icon class="hover:cursor-pointer hover:text-black text-neutral-600" (click)="edit.emit()">edit</mat-icon>
-  </div>
-  <div class="icon">
-    <mat-icon>{{ saving().icon }}</mat-icon>
-  </div>
+<div #savingCard class="card rounded-2xl relative bg-white flex flex-col items-center gap-3 p-5 h-full"
+     style="width: 200px">
+  <mat-menu #menu="matMenu" class="flex w-full flex-row justify-end">
+    <button mat-menu-item class="hover:cursor-pointer hover:text-red-600 text-neutral-600" (click)="delete.emit()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+    <button mat-menu-item class="hover:cursor-pointer hover:text-black text-neutral-600" (click)="edit.emit()">
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+  </mat-menu>
+  <mat-icon>{{ saving().icon }}</mat-icon>
+  <mat-icon [matMenuTriggerFor]="menu" class="absolute right-3 cursor-pointer" matTooltip="Actions">more_vert</mat-icon>
   <div class="tag text-sm">
     {{ tag()?.name }}
   </div>
