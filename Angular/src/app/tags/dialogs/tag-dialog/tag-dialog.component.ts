@@ -6,6 +6,7 @@ import {SavingFormComponent} from "../../../savings/components/saving-form/savin
 import {ITagForm, TagFormComponent} from "../../components/tag-form/tag-form.component";
 import {ITag} from "../../../core";
 import {FormGroup} from "@angular/forms";
+import {DialogTitleComponent} from "../../../shared/dialogs/dialog-title/dialog-title.component";
 
 @Component({
     selector: 'app-tag-dialog',
@@ -15,7 +16,8 @@ import {FormGroup} from "@angular/forms";
         MatDialogModule,
         MatIcon,
         SavingFormComponent,
-        TagFormComponent
+        TagFormComponent,
+        DialogTitleComponent
     ],
     templateUrl: './tag-dialog.component.html',
     styleUrl: './tag-dialog.component.scss'

@@ -1,7 +1,4 @@
-<div class="!flex !justify-between pt-3 px-3">
-  <span class="pl-3 select-none" [innerHTML]="title"></span>
-  <mat-icon class="cursor-pointer text-neutral-700 hover:text-black" [mat-dialog-close]="false">close</mat-icon>
-</div>
+<app-dialog-title [title]="title"></app-dialog-title>
 
 <mat-dialog-content>
   <app-tag-form #form [tag]="dialogData.tag"></app-tag-form>

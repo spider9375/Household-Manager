@@ -47,7 +47,7 @@ export class SavingFormComponent implements OnInit {
         this.form = this.fb.nonNullable.group({
             id: this.saving()?.id!,
             icon: this.saving()?.icon!,
-            tag: [this.saving()?.tag!, Validators.required],
+            tag: this.saving()?.tag!,
             amount: [this.saving()?.amount!, [Validators.required, Validators.min(0)]],
             goal: this.saving()?.goal!,
             name: [this.saving()?.name!, Validators.required],

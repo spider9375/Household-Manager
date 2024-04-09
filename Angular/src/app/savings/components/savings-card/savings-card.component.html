@@ -5,7 +5,8 @@
       <mat-icon>edit</mat-icon>
       Edit
     </button>
-    <button mat-menu-item class="hover:cursor-pointer hover:text-red-600 text-neutral-600" (click)="delete.emit()">
+    <button mat-menu-item (dialog-confirm)="delete.emit()"
+            class="hover:cursor-pointer hover:text-red-600 text-neutral-600">
       <mat-icon>delete</mat-icon>
       Delete
     </button>

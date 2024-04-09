@@ -11,6 +11,7 @@ import {
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {ISaving} from "../../models";
+import {DialogTitleComponent} from "../../../shared/dialogs/dialog-title/dialog-title.component";
 
 @Component({
     selector: 'app-saving-dialog',
@@ -22,7 +23,8 @@ import {ISaving} from "../../models";
         MatDialogActions,
         MatButton,
         MatDialogClose,
-        MatIcon
+        MatIcon,
+        DialogTitleComponent
     ],
     templateUrl: './saving-dialog.component.html',
     styleUrl: './saving-dialog.component.scss'

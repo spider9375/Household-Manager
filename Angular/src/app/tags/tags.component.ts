@@ -11,6 +11,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TagDialogComponent} from "./dialogs/tag-dialog/tag-dialog.component";
 import {ITag} from "../core";
 import {filter, tap} from 'rxjs';
+import {ConfirmDialogDirective} from "../shared/dialogs/confirm-dialog/confirm-dialog.directive";
 
 @Component({
     selector: 'app-tags',
@@ -23,7 +24,8 @@ import {filter, tap} from 'rxjs';
         MatMenuItem,
         MatChip,
         NgIf,
-        NgStyle
+        NgStyle,
+        ConfirmDialogDirective,
     ],
     templateUrl: './tags.component.html',
     styleUrl: './tags.component.scss'
@@ -44,5 +46,9 @@ export class TagsComponent {
                 }
             })
         ).subscribe();
+    }
+
+    delete(id: number): void {
+        this.tagStore.delete$.next(id);
     }
 }

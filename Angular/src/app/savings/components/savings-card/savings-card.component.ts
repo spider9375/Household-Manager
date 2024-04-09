@@ -2,10 +2,11 @@ import {Component, computed, effect, ElementRef, EventEmitter, input, Output, Vi
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {MatChip} from "@angular/material/chips";
-import {ITag} from "../../../core/models";
+import {ITag} from "../../../core";
 import {ISaving} from "../../models";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltip} from "@angular/material/tooltip";
+import {ConfirmDialogDirective} from "../../../shared/dialogs/confirm-dialog/confirm-dialog.directive";
 
 @Component({
     selector: 'app-savings-card',
@@ -16,6 +17,7 @@ import {MatTooltip} from "@angular/material/tooltip";
         MatChip,
         MatMenuModule,
         MatTooltip,
+        ConfirmDialogDirective,
     ],
     templateUrl: './savings-card.component.html',
     styleUrl: './savings-card.component.scss'
