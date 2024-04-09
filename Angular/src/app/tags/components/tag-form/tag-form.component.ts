@@ -3,7 +3,9 @@ import {ITag} from "../../../core";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {NgIf} from "@angular/common";
+import {NgIf, NgStyle} from "@angular/common";
+import {MatChip} from "@angular/material/chips";
+import {ColorInputComponent} from "../../../shared/components/input/color-input/color-input.component";
 
 export interface ITagForm {
     id: FormControl<number>
@@ -20,7 +22,11 @@ export interface ITagForm {
         MatInput,
         MatLabel,
         NgIf,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatChip,
+        NgStyle,
+        ColorInputComponent,
+
     ],
     templateUrl: './tag-form.component.html',
     styleUrl: './tag-form.component.scss'

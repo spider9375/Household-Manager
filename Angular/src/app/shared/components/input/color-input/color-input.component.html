@@ -1,0 +1,11 @@
+<div class="flex flex-col" style="margin-top: -24px" *ngIf="formControl">
+  <mat-label>Color</mat-label>
+  <div class="flex flex-row gap-3 align-middle border-neutral-500 rounded border h-10 p-1.5">
+    <div (click)="colorInput.click()"
+         class="w-6 h-6 border-2 flex-grow-0 flex-shrink-0 border-neutral-500 !cursor-pointer rounded-full hover:brightness-90"
+         [ngStyle]="{backgroundColor: formControl!.value}"></div>
+    <input matInput [formControl]="formControl" class="border border-neutral-500 rounded pl-1">
+    <input #colorInput class="invisible h-0 w-0" type="color" [value]="formControl.value"
+           (change)="formControl.patchValue($any($event.target).value)">
+  </div>
+</div>
