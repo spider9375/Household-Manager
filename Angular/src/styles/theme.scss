@@ -1,3 +1,7 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 /*@use '@angular/material' as mat;
@@ -25,4 +29,6 @@ $dark-theme: mat.define-dark-theme((
   @include mat.all-component-colors($light-theme);
   @include mat.all-component-densities($light-theme);
 }*/
+
+@include mat.form-field-density((density: -4));
 

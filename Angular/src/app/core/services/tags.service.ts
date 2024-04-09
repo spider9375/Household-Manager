@@ -28,7 +28,7 @@ export class TagsService {
         return this.http.put<ITag>(`${this.url}/${payload.id}`, payload);
     }
 
-    delete(id: string): Observable<void> {
+    delete(id: number): Observable<void> {
         return this.http.delete<void>(`${this.url}/${id}`);
     }
 }
