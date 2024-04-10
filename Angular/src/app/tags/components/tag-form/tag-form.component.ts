@@ -11,6 +11,7 @@ export interface ITagForm {
     id: FormControl<number>
     name: FormControl<string>
     color: FormControl<string>
+    icon: FormControl<string>
 }
 
 @Component({
@@ -41,7 +42,8 @@ export class TagFormComponent implements OnInit {
         this.form = this.fb.nonNullable.group({
             id: this.tag()?.id!,
             name: [this.tag()?.name!, Validators.required],
-            color: this.tag()?.color!
+            color: this.tag()?.color!,
+            icon: this.tag()?.icon!
         })
     }
 }

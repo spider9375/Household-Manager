@@ -11,7 +11,7 @@
       Delete
     </button>
   </mat-menu>
-  <mat-icon>{{ saving().icon }}</mat-icon>
+  <mat-icon>{{ tag()?.icon }}</mat-icon>
   <mat-icon [matMenuTriggerFor]="menu" class="absolute right-3 cursor-pointer" matTooltip="Actions">more_vert</mat-icon>
   <div class="tag text-sm">
     {{ tag()?.name }}

@@ -11,7 +11,6 @@ import {CurrencyStore} from "../../../core/stores/currency.store";
 
 export interface ISavingForm extends FormGroup<{
     id: FormControl<number>,
-    icon: FormControl<string>
     tag: FormControl<string>,
     amount: FormControl<number>
     goal: FormControl<number>
@@ -46,7 +45,6 @@ export class SavingFormComponent implements OnInit {
     ngOnInit() {
         this.form = this.fb.nonNullable.group({
             id: this.saving()?.id!,
-            icon: this.saving()?.icon!,
             tag: this.saving()?.tag!,
             amount: [this.saving()?.amount!, [Validators.required, Validators.min(0)]],
             goal: this.saving()?.goal!,

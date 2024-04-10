@@ -31,7 +31,7 @@ import {ConfirmDialogDirective} from "../shared/dialogs/confirm-dialog/confirm-d
     styleUrl: './tags.component.scss'
 })
 export class TagsComponent {
-    readonly columns = ["name", "color", "actions"]
+    readonly columns = ["icon", "name", "color", "actions"]
     readonly tagStore = inject(TagsStore);
     readonly dialogService = inject(MatDialog);
 

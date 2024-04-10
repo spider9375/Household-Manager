@@ -9,15 +9,19 @@
 </div>
 <app-table [columns]="columns"
            [data]="tagStore.tags()"
-           [customColumns]="['color']"
+           [customColumns]="['color', 'icon']"
            [customColumnsTemplate]="custom"
            [actionColumnTemplate]="actions"
 ></app-table>
 
 <ng-template #custom let-item="item" let-col="col">
   <ng-container *ngIf="col === 'color'">
-    <mat-chip disableRipple [ngStyle]="{backgroundColor: item.color, width: '6rem'}">{{ item.color ?? 'N/A' }}
+    <mat-chip disableRipple [ngStyle]="{backgroundColor: item.color, width: '6rem'}"><span
+      class="text-white">{{ item.color ?? 'N/A' }}</span>
     </mat-chip>
+  </ng-container>
+  <ng-container *ngIf="col === 'icon'">
+    <mat-icon>{{ item.icon }}</mat-icon>
   </ng-container>
 </ng-template>
 
