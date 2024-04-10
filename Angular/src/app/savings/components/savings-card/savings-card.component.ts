@@ -7,6 +7,7 @@ import {ISaving} from "../../models";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltip} from "@angular/material/tooltip";
 import {ConfirmDialogDirective} from "../../../shared/dialogs/confirm-dialog/confirm-dialog.directive";
+import {TagPillComponent} from "../../../shared/components/tag-pill/tag-pill.component";
 
 @Component({
     selector: 'app-savings-card',
@@ -18,6 +19,7 @@ import {ConfirmDialogDirective} from "../../../shared/dialogs/confirm-dialog/con
         MatMenuModule,
         MatTooltip,
         ConfirmDialogDirective,
+        TagPillComponent,
     ],
     templateUrl: './savings-card.component.html',
     styleUrl: './savings-card.component.scss'

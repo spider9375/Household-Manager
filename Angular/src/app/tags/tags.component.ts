@@ -12,6 +12,8 @@ import {TagDialogComponent} from "./dialogs/tag-dialog/tag-dialog.component";
 import {ITag} from "../core";
 import {filter, tap} from 'rxjs';
 import {ConfirmDialogDirective} from "../shared/dialogs/confirm-dialog/confirm-dialog.directive";
+import {ITableColumn} from "../shared/components/table/models";
+import {TagPillComponent} from "../shared/components/tag-pill/tag-pill.component";
 
 @Component({
     selector: 'app-tags',
@@ -26,12 +28,26 @@ import {ConfirmDialogDirective} from "../shared/dialogs/confirm-dialog/confirm-d
         NgIf,
         NgStyle,
         ConfirmDialogDirective,
+        TagPillComponent,
     ],
     templateUrl: './tags.component.html',
     styleUrl: './tags.component.scss'
 })
 export class TagsComponent {
-    readonly columns = ["icon", "name", "color", "actions"]
+    readonly columns: ITableColumn[] = [
+        {
+            field: "icon",
+            label: 'Icon'
+        }, {
+            field: "name",
+            label: 'Name',
+        }, {
+            field: "color",
+            label: 'Color'
+        }, {
+            field: "actions",
+            label: "Actions"
+        }]
     readonly tagStore = inject(TagsStore);
     readonly dialogService = inject(MatDialog);
 

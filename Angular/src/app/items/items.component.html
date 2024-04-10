@@ -1,0 +1,13 @@
+<div class="flex flex-row justify-between">
+  <h1 class="text-xl">Items</h1>
+  <div>
+    <button mat-flat-button class="mat-primary my-3" (click)="openModal()">
+      <mat-icon>add</mat-icon>
+      Add Item
+    </button>
+  </div>
+</div>
+
+<app-item-table [items]="itemStore.items()"
+                (edit)="openModal($event)"
+                (delete)="itemStore.delete$.next($event)"></app-item-table>

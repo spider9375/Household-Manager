@@ -16,9 +16,7 @@
 
 <ng-template #custom let-item="item" let-col="col">
   <ng-container *ngIf="col === 'color'">
-    <mat-chip disableRipple [ngStyle]="{backgroundColor: item.color, width: '6rem'}"><span
-      class="text-white">{{ item.color ?? 'N/A' }}</span>
-    </mat-chip>
+    <app-tag-pill [tag]="item" displayColorCode></app-tag-pill>
   </ng-container>
   <ng-container *ngIf="col === 'icon'">
     <mat-icon>{{ item.icon }}</mat-icon>

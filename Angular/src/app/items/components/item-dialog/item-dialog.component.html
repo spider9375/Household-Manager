@@ -1,0 +1,9 @@
+<app-dialog-title [title]="title"></app-dialog-title>
+
+<mat-dialog-content>
+  <app-item-form #form [item]="dialogData.item"></app-item-form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onConfirm(form.form)">Confirm</button>
+</mat-dialog-actions>

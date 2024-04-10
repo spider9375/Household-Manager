@@ -40,6 +40,4 @@ export class TagsStore {
             tap((id) => this._tags.update(prev => prev.filter(s => s.id !== id)))
         ).subscribe()
     }
-
-
 }

@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {SavingsComponent} from "./savings/savings.component";
 import {TagsComponent} from "./tags/tags.component";
+import {ItemsComponent} from "./items/items.component";
 
 export const routes: Routes = [
     {
@@ -14,6 +15,10 @@ export const routes: Routes = [
     {
         path: "savings",
         component: SavingsComponent,
+    },
+    {
+        path: "items",
+        component: ItemsComponent
     },
     {
         path: "tags",
