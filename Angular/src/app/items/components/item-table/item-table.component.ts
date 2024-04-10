@@ -60,7 +60,6 @@ export class ItemTableComponent {
 
     expiresSoon(date: Date): boolean {
         const days = this.dateDiffInDays(this.today(), new Date(date))
-        console.log(days);
         return days < 3 && days > 0;
     }
 
