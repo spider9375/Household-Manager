@@ -1,35 +1,13 @@
-<form *ngIf="form" [formGroup]="form" class="flex flex-col p-3">
+<form *ngIf="form" [formGroup]="form" class="flex flex-col p-3 gap-2">
   <div class="grid grid-cols-3 gap-3">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Amount</mat-label>
-      <input matInput type="number" formControlName="amount">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Currency</mat-label>
-      <mat-select formControlName="currency">
-        @for (currency of currencyStore.currencyOptionItems(); track currency.value) {
-          <mat-option [value]="currency.value">{{ currency.title }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <app-text-input label="Name" formControlName="name"></app-text-input>
+    <app-number-input label="Amount" formControlName="amount"></app-number-input>
+    <app-select-input label="Currency" [data]="currencyStore.currencyOptionItems()"
+                      formControlName="currency"></app-select-input>
   </div>
   <div class="grid grid-cols-3 gap-3">
-    <mat-form-field>
-      <mat-label>Tag</mat-label>
-      <mat-select formControlName="tag">
-        @for (tag of tagsStore.tagsOptionItems(); track tag.value) {
-          <mat-option [value]="tag.value">{{ tag.title }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Goal</mat-label>
-      <input matInput type="number" formControlName="goal">
-    </mat-form-field>
+    <app-select-input label="Tag" [data]="tagsStore.tagsOptionItems()" formControlName="tag"></app-select-input>
+    <app-number-input label="Goal" formControlName="goal"></app-number-input>
   </div>
 </form>
 

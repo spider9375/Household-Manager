@@ -5,7 +5,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {NgIf, NgStyle} from "@angular/common";
 import {MatChip} from "@angular/material/chips";
-import {ColorInputComponent} from "../../../shared/components/input/color-input/color-input.component";
+import {ColorInputComponent, TextInputComponent} from "../../../shared/components/input";
 
 export interface ITagForm {
     id: FormControl<number>
@@ -27,7 +27,7 @@ export interface ITagForm {
         MatChip,
         NgStyle,
         ColorInputComponent,
-
+        TextInputComponent,
     ],
     templateUrl: './tag-form.component.html',
     styleUrl: './tag-form.component.scss'

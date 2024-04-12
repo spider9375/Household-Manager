@@ -8,6 +8,7 @@ import {MatButton} from "@angular/material/button";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {TagsStore} from "../../../core/stores/tags.store";
 import {CurrencyStore} from "../../../core/stores/currency.store";
+import {NumberInputComponent, SelectInputComponent, TextInputComponent} from "../../../shared/components/input";
 
 export interface ISavingForm extends FormGroup<{
     id: FormControl<number>,
@@ -30,6 +31,9 @@ export interface ISavingForm extends FormGroup<{
         MatButton,
         MatSelect,
         MatOption,
+        TextInputComponent,
+        NumberInputComponent,
+        SelectInputComponent,
     ],
     templateUrl: './saving-form.component.html',
     styleUrl: './saving-form.component.scss'

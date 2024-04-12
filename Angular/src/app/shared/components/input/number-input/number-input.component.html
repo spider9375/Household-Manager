@@ -1,0 +1,6 @@
+<mat-form-field *ngIf="formControl">
+  <mat-label [innerHTML]="label"></mat-label>
+  <input matInput type="number" [formControl]="formControl">
+  <mat-error *ngIf="(formControl.dirty || formControl.touched) && formControl.invalid">{{ validationErrorMessage }}
+  </mat-error>
+</mat-form-field>

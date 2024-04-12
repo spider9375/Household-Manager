@@ -1,3 +1,7 @@
 <div #pill *ngIf="tag()" class="tag text-sm w-fit">
-  {{ displayColorCode() ? tag().color : tag().name }}
+  <span *ngIf="displayColorCode()">{{ tag().color }}</span>
+  <span *ngIf="!displayColorCode()"
+        class="flex items-center gap-1">
+    <mat-icon *ngIf="showIcon()">{{ tag().icon }}</mat-icon>
+    {{ tag().name }}</span>
 </div>

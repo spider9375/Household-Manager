@@ -1,30 +1,9 @@
 <form *ngIf="!!form" [formGroup]="form">
   <div>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tag</mat-label>
-      <mat-select formControlName="tag">
-        @for (tag of tagsStore.tagsOptionItems(); track tag.value) {
-          <mat-option [value]="tag.value">{{ tag.title }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Unit of measure</mat-label>
-      <input matInput formControlName="unitOfMeasure">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Quantity</mat-label>
-      <input matInput formControlName="quantity">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Expiration date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="expirationDate">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <app-text-input label="Name" formControlName="name"></app-text-input>
+    <app-select-input label="Tag" [data]="tagsStore.tagsOptionItems()" formControlName="tag"></app-select-input>
+    <app-text-input label="Name" formControlName="unitOfMeasure"></app-text-input>
+    <app-text-input label="Name" formControlName="quantity"></app-text-input>
+    <app-datepicker-input label="Expiratoin date" formControlName="expirationDate"></app-datepicker-input>
   </div>
 </form>

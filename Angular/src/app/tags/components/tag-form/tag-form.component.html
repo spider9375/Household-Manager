@@ -1,14 +1,8 @@
 <form *ngIf="form" [formGroup]="form" class="flex flex-col p-3">
   <div class="grid grid-cols-3 gap-3">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
+    <app-text-input label="Name" formControlName="name"></app-text-input>
     <app-color-input formControlName="color"></app-color-input>
-    <mat-form-field>
-      <mat-label>Icon</mat-label>
-      <input matInput formControlName="icon">
-    </mat-form-field>
+    <app-text-input label="Name" formControlName="icon"></app-text-input>
   </div>
 </form>
 

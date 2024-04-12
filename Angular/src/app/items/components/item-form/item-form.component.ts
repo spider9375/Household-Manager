@@ -7,7 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {TagsStore} from "../../../core/stores/tags.store";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
-import {provideNativeDateAdapter} from "@angular/material/core";
+import {DatepickerInputComponent, SelectInputComponent, TextInputComponent} from "../../../shared/components/input";
 
 export interface IItemForm {
     id: FormControl<number>
@@ -28,8 +28,10 @@ export interface IItemForm {
         MatSelectModule,
         MatInputModule,
         MatDatepickerModule,
+        TextInputComponent,
+        SelectInputComponent,
+        DatepickerInputComponent,
     ],
-    providers: [provideNativeDateAdapter()],
     templateUrl: './item-form.component.html',
     styleUrl: './item-form.component.scss'
 })

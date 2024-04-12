@@ -7,24 +7,26 @@
 
 <ng-template #custom let-item="item" let-col="col">
   <ng-container *ngIf="col === 'tag'">
-    <app-tag-pill [tag]="tagStore.tagById()[item.tag]"></app-tag-pill>
+    <app-tag-pill [showIcon]="true" [tag]="tagStore.tagById()[item.tag]"></app-tag-pill>
   </ng-container>
   <ng-container *ngIf="col === 'expirationDate'">
-    <ng-container *ngIf="isExpired(item.expirationDate)">
+    <ng-container *ngIf="item.expirationDate">
+      <ng-container *ngIf="isExpired(item.expirationDate)">
       <span class="text-red-500 font-medium flex items-end gap-0.5">
         {{ item.expirationDate | date:'shortDate':'offset' }}
         <mat-icon matTooltip="Item is expired!">error</mat-icon>
       </span>
-    </ng-container>
-    <ng-container *ngIf="expiresSoon(item.expirationDate)">
+      </ng-container>
+      <ng-container *ngIf="expiresSoon(item.expirationDate)">
       <span class="text-orange-500 font-medium flex items-end gap-0.5">
         {{ item.expirationDate | date:'shortDate':'offset' }}
         <mat-icon
           [matTooltip]="'Item will expire in ' + dateDiffInDays(today(), convertToDate(item.expirationDate)) + ' days!'">error</mat-icon>
       </span>
-    </ng-container>
-    <ng-container *ngIf="!isExpired(item.expirationDate) && !expiresSoon(item.expirationDate)">
-      <span>{{ item.expirationDate | date:'shortDate':'offset' }}</span>
+      </ng-container>
+      <ng-container *ngIf="!isExpired(item.expirationDate) && !expiresSoon(item.expirationDate)">
+        <span>{{ item.expirationDate | date:'shortDate':'offset' }}</span>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-template>

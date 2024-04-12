@@ -1,0 +1,8 @@
+<mat-form-field *ngIf="formControl">
+  <mat-label [innerHTML]="label"></mat-label>
+  <mat-select [formControl]="formControl">
+    @for (item of data(); track item.value) {
+      <mat-option [value]="item.value">{{ item.title }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

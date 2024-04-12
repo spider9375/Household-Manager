@@ -8,4 +8,6 @@
     <input #colorInput class="invisible h-0 w-0" type="color" [value]="formControl.value"
            (change)="formControl.patchValue($any($event.target).value)">
   </div>
+  <mat-error *ngIf="(formControl.dirty || formControl.touched) && formControl.invalid">{{ validationErrorMessage }}
+  </mat-error>
 </div>
