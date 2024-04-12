@@ -14,6 +14,7 @@ import {filter, tap} from 'rxjs';
 import {ConfirmDialogDirective} from "../shared/dialogs/confirm-dialog/confirm-dialog.directive";
 import {ITableColumn} from "../shared/components/table/models";
 import {TagPillComponent} from "../shared/components/tag-pill/tag-pill.component";
+import {DeleteButtonComponent, EditButtonComponent} from "../shared/components/buttons";
 
 @Component({
     selector: 'app-tags',
@@ -29,6 +30,8 @@ import {TagPillComponent} from "../shared/components/tag-pill/tag-pill.component
         NgStyle,
         ConfirmDialogDirective,
         TagPillComponent,
+        DeleteButtonComponent,
+        EditButtonComponent,
     ],
     templateUrl: './tags.component.html',
     styleUrl: './tags.component.scss'

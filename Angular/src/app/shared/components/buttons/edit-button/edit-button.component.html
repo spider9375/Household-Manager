@@ -1,0 +1,11 @@
+<button *ngIf="menuItem(); else icon" mat-menu-item class="hover:cursor-pointer hover:text-black text-neutral-600">
+  <mat-icon>edit</mat-icon>
+  Edit
+</button>
+<ng-template #icon>
+  <mat-icon class="hover:cursor-pointer hover:text-black text-neutral-600" matTooltip="Edit">
+    edit
+  </mat-icon>
+</ng-template>
+
+

@@ -9,6 +9,7 @@ import {ITableColumn} from "../../../shared/components/table/models";
 import {TagsStore} from "../../../core/stores/tags.store";
 import {TagPillComponent} from "../../../shared/components/tag-pill/tag-pill.component";
 import {MatTooltip} from "@angular/material/tooltip";
+import {DeleteButtonComponent, EditButtonComponent} from "../../../shared/components/buttons";
 
 @Component({
     selector: 'app-item-table',
@@ -23,7 +24,9 @@ import {MatTooltip} from "@angular/material/tooltip";
         TagPillComponent,
         DatePipe,
         NgClass,
-        MatTooltip
+        MatTooltip,
+        DeleteButtonComponent,
+        EditButtonComponent
     ],
     templateUrl: './item-table.component.html',
     styleUrl: './item-table.component.scss'

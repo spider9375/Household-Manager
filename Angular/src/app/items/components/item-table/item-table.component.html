@@ -32,11 +32,6 @@
 </ng-template>
 
 <ng-template #actions let-item="item">
-  <mat-icon class="hover:cursor-pointer hover:text-black text-neutral-600" (click)="edit.emit(item)">
-    edit
-  </mat-icon>
-  <mat-icon class="hover:cursor-pointer hover:text-red-600 text-neutral-600"
-            (dialog-confirm)="delete.emit(item.id)">
-    delete
-  </mat-icon>
+  <app-edit-button (click)="edit.emit(item)"></app-edit-button>
+  <app-delete-button (delete)="delete.emit(item.id)"></app-delete-button>
 </ng-template>

@@ -8,6 +8,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltip} from "@angular/material/tooltip";
 import {ConfirmDialogDirective} from "../../../shared/dialogs/confirm-dialog/confirm-dialog.directive";
 import {TagPillComponent} from "../../../shared/components/tag-pill/tag-pill.component";
+import {DeleteButtonComponent, EditButtonComponent} from "../../../shared/components/buttons";
 
 @Component({
     selector: 'app-savings-card',
@@ -20,6 +21,8 @@ import {TagPillComponent} from "../../../shared/components/tag-pill/tag-pill.com
         MatTooltip,
         ConfirmDialogDirective,
         TagPillComponent,
+        EditButtonComponent,
+        DeleteButtonComponent,
     ],
     templateUrl: './savings-card.component.html',
     styleUrl: './savings-card.component.scss'
