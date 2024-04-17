@@ -1,0 +1,20 @@
+<div class="flex justify-center align-middle pt-5">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Login">
+      <form *ngIf="loginForm" [formGroup]="loginForm" class="flex flex-col gap-2 pt-3">
+        <app-text-input label="Username" formControlName="username"></app-text-input>
+        <app-text-input label="Password" type="password" formControlName="password"></app-text-input>
+      </form>
+      <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Log in</button>
+    </mat-tab>
+    <mat-tab label="Sign Up">
+      <form *ngIf="signupForm" [formGroup]="signupForm" class="flex flex-col gap-2 pt-3">
+        <app-text-input label="Username" formControlName="username"></app-text-input>
+        <app-text-input label="Email" formControlName="email"></app-text-input>
+        <app-text-input label="Password" type="password" formControlName="password"></app-text-input>
+      </form>
+      <button mat-raised-button color="primary" [disabled]="signupForm.invalid" (click)="register()">Sign Up</button>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

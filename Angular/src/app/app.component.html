@@ -1,18 +1,35 @@
-<div class="flex p-4 bg-gray-100">
+<div class="flex p-4 bg-gray-100" *ngIf="authService.isLoggedIn(); else loggedOut">
   <aside class="sidebar">
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 h-full">
       <div class="flex items-center justify-center pt-2">
         <span class="text-white">MBT</span>
       </div>
       <hr>
-      @for (link of links; track link.route) {
-        <a mat-button
-           class="nav-item !text-white"
-           [routerLinkActive]="'active'"
-           [routerLink]="link.route">
-          <mat-icon>{{ link.icon }}</mat-icon>
-          {{ link.label }}</a>
-      }
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          @for (link of links; track link.route) {
+            <a mat-button
+               class="nav-item !text-white"
+               [routerLinkActive]="'active'"
+               [routerLink]="link.route">
+              <mat-icon>{{ link.icon }}</mat-icon>
+              {{ link.label }}</a>
+          }
+        </div>
+        <div>
+          <button mat-button class="nav-item !text-white" [matMenuTriggerFor]="menu">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </button>
+          <mat-menu #menu="matMenu" xPosition='before' yPosition="above">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>power_settings_new</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+
     </div>
 
   </aside>
@@ -20,6 +37,12 @@
     <router-outlet></router-outlet>
   </main>
 </div>
+
+<ng-template #loggedOut>
+  <main class="overflow-auto light-theme">
+    <router-outlet></router-outlet>
+  </main>
+</ng-template>
 
 
 
